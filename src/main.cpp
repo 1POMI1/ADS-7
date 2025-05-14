@@ -1,17 +1,16 @@
 // Copyright 2022 NNTU-CS
 #include "train.h"
-#include <iostream>
-#include <vector>
+
 #include <chrono>
+#include <iostream>
 #include <random>
+#include <string>
+#include <vector>
 
-using namespace std;
-using namespace std::chrono;
-
-void fillTrain(Train& t, int n, const string& mode) {
-  random_device rd;
-  mt19937 gen(rd());
-  uniform_int_distribution<> dist(0, 1);
+void fillTrain(Train& t, int n, const std::string& mode) {
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> dist(0, 1);
 
   for (int i = 0; i < n; ++i) {
     if (mode == "off") t.addCar(false);
@@ -21,27 +20,28 @@ void fillTrain(Train& t, int n, const string& mode) {
 }
 
 int main() {
-  vector<int> sizes = {10, 20, 40, 80, 160, 320, 640, 1000};
+  std::vector<int> sizes = {10, 20, 40, 80, 160, 320, 640, 1000};
 
-  for (const string& mode : {"off", "on", "random"}) {
-    cout << "Mode: " << mode << endl;
+  for (const std::string& mode : {"off", "on", "random"}) {
+    std::cout << "Mode: " << mode << std::endl;
     for (int n : sizes) {
       Train train;
       fillTrain(train, n, mode);
 
-      auto start = high_resolution_clock::now();
+      auto start = std::chrono::high_resolution_clock::now();
       int length = train.getLength();
-      auto end = high_resolution_clock::now();
+      auto end = std::chrono::high_resolution_clock::now();
 
-      auto duration = duration_cast<microseconds>(end - start).count();
+      auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
-      cout << "n = " << n
-           << ", length = " << length
-           << ", ops = " << train.getOpCount()
-           << ", time (us) = " << duration << endl;
+      std::cout << "n = " << n
+                << ", length = " << length
+                << ", ops = " << train.getOpCount()
+                << ", time (us) = " << duration << std::endl;
     }
-    cout << endl;
+    std::cout << std::endl;
   }
 
   return 0;
 }
+
