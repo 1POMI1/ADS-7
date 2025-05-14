@@ -1,11 +1,10 @@
 // Copyright 2022 NNTU-CS
-#include "train.h"
-
 #include <chrono>
 #include <iostream>
 #include <random>
 #include <string>
 #include <vector>
+#include "train.h"
 
 void fillTrain(Train& t, int n, const std::string& mode) {
   std::random_device rd;
@@ -32,10 +31,11 @@ int main() {
       int length = train.getLength();
       auto end = std::chrono::high_resolution_clock::now();
 
-      auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+      auto duration =
+          std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+              .count();
 
-      std::cout << "n = " << n
-                << ", length = " << length
+      std::cout << "n = " << n << ", length = " << length
                 << ", ops = " << train.getOpCount()
                 << ", time (us) = " << duration << std::endl;
     }
@@ -44,4 +44,3 @@ int main() {
 
   return 0;
 }
-
