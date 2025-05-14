@@ -43,7 +43,6 @@ int Train::getLength() {
   } while (current != pos);
 
   pos->light = true;
-  countOp++;
 
   int len = 1;
   current = pos->next;
@@ -57,6 +56,7 @@ int Train::getLength() {
 
   return len;
 }
+
 
 int Train::getOpCount() {
   return countOp;
