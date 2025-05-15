@@ -21,8 +21,9 @@ void fillTrain(Train& t, int n, const std::string& mode) {
 int main() {
   std::vector<int> sizes = {10, 20, 40, 80, 160, 320, 640, 1000};
 
+  std::cout << "mode,n,ops,time_us\n";
+
   for (const std::string& mode : {"off", "on", "random"}) {
-    std::cout << "Mode: " << mode << std::endl;
     for (int n : sizes) {
       Train train;
       fillTrain(train, n, mode);
@@ -35,11 +36,8 @@ int main() {
           std::chrono::duration_cast<std::chrono::microseconds>(end - start)
               .count();
 
-      std::cout << "n = " << n << ", length = " << length
-                << ", ops = " << train.getOpCount()
-                << ", time (us) = " << duration << std::endl;
+      std::cout << mode << "," << n << "," << train.getOpCount() << "," << duration << "\n";
     }
-    std::cout << std::endl;
   }
 
   return 0;
