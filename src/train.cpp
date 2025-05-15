@@ -34,6 +34,7 @@ int Train::getLength() {
 
   Car* const pos = start;
   int n = 1;
+  // cppcheck-suppress constVariablePointer
   Car* current = pos->next;
   while (current != pos) {
     n++;
