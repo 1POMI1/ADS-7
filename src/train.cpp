@@ -35,21 +35,15 @@ int Train::getLength() {
   countOp = 0;
   Car* pos = start;
 
-  int n = 1;
-  Car* current = pos->next;
-  while (current != pos) {
-    current = current->next;
-    n++;
-  }
-
-  current = pos;
-  for (int i = 0; i < n; ++i) {
+  Car* current = pos;
+  do {
     current->light = false;
     current = current->next;
     countOp++;
-  }
+  } while (current != pos);
 
   pos->light = true;
+
   current = pos->next;
   int len = 1;
   countOp++;
