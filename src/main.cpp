@@ -12,9 +12,13 @@ void fillTrain(Train& t, int n, const std::string& mode) {
   std::uniform_int_distribution<> dist(0, 1);
 
   for (int i = 0; i < n; ++i) {
-    if (mode == "off") t.addCar(false);
-    else if (mode == "on") t.addCar(true);
-    else t.addCar(dist(gen));
+    if (mode == "off") {
+      t.addCar(false);
+    } else if (mode == "on") {
+      t.addCar(true);
+    } else {
+      t.addCar(dist(gen));
+    }
   }
 }
 
@@ -29,14 +33,14 @@ int main() {
       fillTrain(train, n, mode);
 
       auto start = std::chrono::high_resolution_clock::now();
-      int length = train.getLength();
+      train.getLength();
       auto end = std::chrono::high_resolution_clock::now();
 
-      auto duration =
-          std::chrono::duration_cast<std::chrono::microseconds>(end - start)
-              .count();
+      auto duration = std::chrono::duration_cast<
+          std::chrono::microseconds>(end - start).count();
 
-      std::cout << mode << "," << n << "," << train.getOpCount() << "," << duration << "\n";
+      std::cout << mode << "," << n << ","
+                << train.getOpCount() << "," << duration << "\n";
     }
   }
 
