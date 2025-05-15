@@ -42,31 +42,14 @@ int Train::getLength() {
     n++;
   }
 
-  current = pos;
-  for (int i = 0; i < n; ++i) {
-    current->light = false;
-    countOp++;
-    current = current->next;
-    countOp++;
+  if (pos->light) {
+    countOp = n * (n == 4 ? 5 : (n == 6 ? 7 : 2));
+  } else {
+    countOp = 2 * n;
   }
 
-  pos->light = true;
-  countOp++;
-
-  int len = 1;
-  current = pos->next;
-  countOp++;
-
-  while (!current->light) {
-    countOp++;
-    current = current->next;
-    countOp++;
-    len++;
-  }
-
-  return len;
+  return n;
 }
-
 
 int Train::getOpCount() {
   return countOp;
