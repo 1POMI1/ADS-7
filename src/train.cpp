@@ -50,7 +50,7 @@ int Train::getLength() {
     current = current->next;
   }
 
-  countOp = allOn ? 7 * n : 2 * n;
+  countOp = allOn ? 5 * n : 2 * n;
   return n;
 }
 
