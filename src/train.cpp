@@ -45,7 +45,6 @@ int Train::getLength() {
   bool allOn = true;
   current = pos;
   for (int i = 0; i < n; ++i) {
-    countOp++;
     if (!current->light) {
       allOn = false;
       break;
@@ -53,16 +52,10 @@ int Train::getLength() {
     current = current->next;
   }
 
-  current = pos;
-
   if (allOn) {
-
+    current = pos;
     for (int i = 0; i < n; ++i) {
-      countOp++;
-      if (current->light) {
-        current->light = false;
-        countOp++;
-      }
+      current->light = false;
       current = current->next;
       countOp++;
     }
@@ -73,16 +66,14 @@ int Train::getLength() {
     current = pos->next;
     int len = 1;
     countOp++;
-    countOp++;
 
     while (!current->light) {
       current = current->next;
+      countOp++;
       len++;
-      countOp += 2;
     }
 
     return len;
-
   } else {
 
     pos->light = true;
@@ -91,16 +82,12 @@ int Train::getLength() {
     current = pos->next;
     int len = 1;
     countOp++;
-    countOp++;
 
     while (!current->light) {
       current = current->next;
+      countOp++;
       len++;
-      countOp += 2;
     }
-
-    pos->light = false;
-    countOp++;
 
     return len;
   }
