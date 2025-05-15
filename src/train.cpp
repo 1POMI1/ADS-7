@@ -33,6 +33,7 @@ int Train::getLength() {
   if (!start) return 0;
 
   countOp = 0;
+
   Car* const pos = start;
 
   int n = 1;
@@ -42,13 +43,26 @@ int Train::getLength() {
     n++;
   }
 
-  if (pos->light) {
-    countOp = n * (n == 4 ? 5 : (n == 6 ? 7 : 2));
-  } else {
-    countOp = 2 * n;
+  current = pos;
+  for (int i = 0; i < n; ++i) {
+    current->light = false;
+    current = current->next;
+    countOp++;
   }
 
-  return n;
+  pos->light = true;
+
+  current = pos->next;
+  int len = 1;
+  countOp++;
+
+  while (!current->light) {
+    current = current->next;
+    countOp++;
+    len++;
+  }
+
+  return len;
 }
 
 int Train::getOpCount() {
